@@ -5,16 +5,16 @@ resource "aws_eks_cluster" "eks_cluster" {
   version  = var.cluster_version
 
   vpc_config {
-    subnet_ids = module.vpc.public_subnets
+    subnet_ids              = module.vpc.public_subnets
     endpoint_private_access = var.cluster_endpoint_private_access
     endpoint_public_access  = var.cluster_endpoint_public_access
-    public_access_cidrs     = var.cluster_endpoint_public_access_cidrs    
+    public_access_cidrs     = var.cluster_endpoint_public_access_cidrs
   }
 
   kubernetes_network_config {
     service_ipv4_cidr = var.cluster_service_ipv4_cidr
   }
-  
+
   # Enable EKS Cluster Control Plane Logging > te permite ver los logs en cloudwatch
   enabled_cluster_log_types = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
 
@@ -24,4 +24,17 @@ resource "aws_eks_cluster" "eks_cluster" {
     aws_iam_role_policy_attachment.eks-AmazonEKSClusterPolicy,
     aws_iam_role_policy_attachment.eks-AmazonEKSVPCResourceController,
   ]
+}
+
+resource "aws_eks_addon" "coredns" {
+  cluster_name      = local.eks_cluster_name
+  addon_name        = "coredns"
+  resolve_conflicts = "OVERWRITE"
+}
+
+resource "aws_eks_addon" "vpc-cni" {
+  cluster_name             = local.eks_cluster_name
+  addon_name               = "vpc-cni"
+  resolve_conflicts        = "OVERWRITE"
+  service_account_role_arn = aws_iam_role.cni_iam_role.arn
 }

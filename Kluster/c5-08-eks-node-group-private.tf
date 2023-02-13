@@ -8,7 +8,7 @@ resource "aws_eks_node_group" "eks_ng_private" {
   version = var.cluster_version #(Optional: Defaults to EKS Cluster Kubernetes version)    
   
   ami_type = "AL2_x86_64"
- # pre_bootstrap_user_data = "${local.cluster_name} --b64-cluster-ca ${aws_eks_cluster.eks_cluster.certificate_authority[0].data} --apiserver-endpoint ${aws_eks_cluster.eks_cluster.endpoint} --use-max-pods false"
+  #pre_bootstrap_user_data = "${aws_eks_cluster.eks_cluster.name} --b64-cluster-ca ${aws_eks_cluster.eks_cluster.certificate_authority[0].data} --apiserver-endpoint ${aws_eks_cluster.eks_cluster.endpoint} --use-max-pods false"
   capacity_type   = var.capacity_type_private
   disk_size       = var.disk_size_private
   instance_types  = var.instance_types_private
@@ -36,8 +36,7 @@ resource "aws_eks_node_group" "eks_ng_private" {
     aws_iam_role_policy_attachment.eks-AmazonEKSWorkerNodePolicy,
     aws_iam_role_policy_attachment.eks-AmazonEKS_CNI_Policy,
     aws_iam_role_policy_attachment.eks-AmazonEC2ContainerRegistryReadOnly,
-    kubernetes_config_map_v1.aws_auth,
-    kubectl_manifest.cni_docs
+    kubernetes_config_map_v1.aws_auth
   ] 
   tags = {
     Name = "Private-Node-Group"

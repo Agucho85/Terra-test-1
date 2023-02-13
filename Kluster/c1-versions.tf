@@ -22,7 +22,7 @@ terraform {
     kubectl = {
       source = "gavinbunney/kubectl"
       version = "1.14.0"
-    }         
+    }       
   }
  # Adding Backend as S3 for Remote State Storage
  backend "s3" {

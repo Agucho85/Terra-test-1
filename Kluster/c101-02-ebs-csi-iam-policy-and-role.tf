@@ -53,5 +53,3 @@ output "ebs_csi_iam_role_arn" {
   description = "EBS CSI IAM Role ARN"
   value = aws_iam_role.ebs_csi_iam_role.arn
 }
-
-
