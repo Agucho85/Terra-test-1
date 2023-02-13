@@ -30,6 +30,7 @@ resource "aws_eks_addon" "coredns" {
   cluster_name      = local.eks_cluster_name
   addon_name        = "coredns"
   resolve_conflicts = "OVERWRITE"
+  depends_on        = [aws_eks_cluster.eks_cluster]
 }
 
 resource "aws_eks_addon" "vpc-cni" {
