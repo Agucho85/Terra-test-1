@@ -1,4 +1,4 @@
-## To define the general conditions that terraform will use, go to the files and modify according to the project and location:
+# To define the general conditions that terraform will use, go to the files and modify according to the project and location:
 A) Define `ec2bastion.auto.tfvars` you have to specify the instance type and key pair to use in them.
 
 B) Define `eks.auto.tfvars` define the cluster_name.
@@ -16,7 +16,54 @@ change the CIDRS with each vpc that is on the same account to be able to do vpc 
 
 E) Define `iam.auto.tfvars` here you can match the eks-admin for the cluster.
 
-## Terraform files
+
+# BEFORE ANY APPLY: CHECK
+  ## For new EKS
+    1 - Check Backend in c001-versions.tf: Go to AWS Account
+      a - Create a bucket in the region the eks is going to be deployed, determine the path (create folders /cluster/tfstate/), to hold the tfstate file.
+      b - Create a Dynamodb table with the eks_cluster_name
+    2 - Form conections with ADO and AWS.
+      In AWS: 
+        - Create a IAM user with Administrator Acces (better to limit the permisions)
+          User_name should be ADO-AWS-<AccountID_of_AWS>-<AWS-REGION>
+            This User has a region limitation to perform some action (perform AWS actions)
+            You will need acceses keys, for programmatic access.
+              Save credencials in 1password:
+                ITEM = login 
+                Title = User_name as title)
+                File = the acces key file should be named User_name-accesskeys
+      In ADO:
+        - Go to the Project Settings, create a new service conection "AWS for Terraform".
+          You will need to fill:
+            - Access key id
+            - Secret access key
+            - Region
+            - Service conection name > same as user ADO-AWS-<AccountID_of_AWS>-<AWS-REGION>
+  ## For any EKS:
+   - Check the files called *.tfvars and change them as needed
+   - Also for changing Region (ECR repositories for aws addons), private key
+   - Check backend configuration in c001-versions.tf 
+   - Check adn compare versions of Terraform provider, installed with cli and c001-versions.tf
+
+# Terraform Commands
+
+  ## Create EKS Cluster
+    terraform init  >> Wil download all needed modules to create all resources.
+    terraform validate  >> Perform a sintaxis check for HCL 
+    terraform plan --out example_plan  >> Perform a plan that will be executed
+        **If you have issues and the tfstate got lock please, confirm no one is working on the cluster and perform:
+          terraform force-unlock <some-hash-abc-123> (this cames in error mistake)**
+    terraform apply example_plan (this command has the auto-approve implicit)
+        **Note: In this action you may need to apply action to finish the configuration of COREDNS addon in EKS**
+
+  ## If EKS Cluster already create as per previous sections JUST VERIFY
+    terraform init
+    terraform state list  
+
+  ## Destroy a cluster    
+    terraform destroy  > you will need to execute it 4 times and go to the AWS account an erase de log gruop created for the eks. 
+    
+# Terraform files
 - c001-versions.tf  > to set terraform providers, backend configration of tfstate file and lock with dynamo db (check `___________`) 
 
 - c002-01-generic-variables.tf > to load variable use by terraform, they can be setup in terraform.tfvars
@@ -28,33 +75,31 @@ E) Define `iam.auto.tfvars` here you can match the eks-admin for the cluster.
 
 - terraform.tfvars > to load variable values by default from this file related to terraform
 
-## VPC files
+# VPC files
 - c003-01-vpc-variables.tf > Define `Input Variables` for VPC module and reference them in VPC Terraform Module
 - c003-02-vpc-module.tf > Create VPC using `Terraform Modules`
 - c003-03-vpc-outputs.tf  for VPC
 - vpc.auto.tfvars > to load variables values by default from this file related to VPC
 
-## EC2 Bastion files
+# EC2 Bastion files
 - c004-01-ec2bastion-variables.tf > > Define `Input Variables` for EC2 module and reference them in EC2 Terraform Module
 - c004-02-ec2bastion-outputs.tf > for EC2
 - c004-03-ec2bastion-securitygroups.tf > Determine Security Groups for BAstion host
-- c004-04-ami-datasource.tf > Check the last AMI of AWS and list it
 - c004-05-ec2bastion-instance.tf > Create EC" bastion using `Terraform Modules`
 - c004-06-ec2bastion-elasticip.tf > Assign an Elastic IP for the bastion host
 - c004-07-ec2bastion-provisioners.tf > Execute commands in EC2 to copy de pem file for conecting to other nodes
 - ec2bastion.auto.tfvars > to load variables values by default from this file related to EC2
 
-## EKS files
-  + EKS General files
+# EKS files
+  ## EKS General files
     - c005-01-eks-variables.tf
-    - c005-02-eks-outputs.tf
     - c005-05-securitygroups-eks.tf
     - c005-06-eks-cluster.tf
     - c005-09-namespaces.tf
     - c007-01-kubernetes-provider.tf
     - c099-01-helm-provider.tf
   
-  + IAM Section
+  ## IAM Section
     - c005-03-iamrole-for-eks-cluster.tf
     - c005-04-iamrole-for-eks-nodegroup.tf
     - c006-01-iam-oidc-connect-provider-variables.tf
@@ -72,25 +117,43 @@ E) Define `iam.auto.tfvars` here you can match the eks-admin for the cluster.
     - c101-01-ebs-csi-datasources.tf
     - iam.auto.tfvars
   
-  + RBAC
+  ## RBAC
     - c007-02-kubernetes-configmap.tf
     - c010-03-k8s-clusterrole-clusterrolebinding.tf
     - check c110.02-cni.yml
 
-  + ADD-ONS
+  ## ADD-ONS
     - c110-03-cni-addon.tf
     - c110.02-cni.yml > creates several resources inside eks
     - c102-02-cluster-autoscaler-install.tf
     - c103-01-promtheus.tf
     - c101-01-ebs-csi-datasources.tf
-    - c101-05-ebs-csi-outputs.tf
     - c100-02-metrics-server-install.tf
-    - c100-03-metrics-server-outputs.tf
 
   
-  + EKS Public Node Groups files
+  ## EKS Public Node Groups files
     - c005-07-eks-node-group-public.tf
     - c005-05-securitygroups-eks.tf
+    - Folder /private-key contains the key pair for Bastion and/or public node group - View Readme
 
-  + EKS Private Node Groups files
+  ## EKS Private Node Groups files
     - c005-08-eks-node-group-private.tf
+
+  ## Terraform and EKS Outputs
+    - c005-02-eks-outputs.tf
+    - c100-03-metrics-server-outputs.tf
+    - c101-05-ebs-csi-outputs.tf
+    - c103-02-promtheus-outputs.tf
+    - c110-05-cni-outputs.tf
+    - c102-03-cluster-autoscaler-outputs.tf
+  
+  ## Bastion
+    - Folder ptivate-key contains the key pair for Bastion and/or public node group - View Readme
+		- c004-01-ec2bastion-variables.tf
+		- c004-02-ec2bastion-outputs.tf
+		- c004-03-ec2bastion-securitygroups.tf
+		- c004-04-ami-datasource.tf
+		- c004-05-ec2bastion-instance.tf
+		- c004-06-ec2bastion-elasticip.tf
+		- c004-07-ec2bastion-provisioners.tf
+    - ec2bastion.auto.tfvars

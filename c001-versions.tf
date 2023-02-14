@@ -28,7 +28,7 @@ terraform {
  backend "s3" {
    bucket = "tfstate-prueba"
    key    = "dev/cluster/terraform.tfstate"
-   region = "us-west-2" 
+   region = var.aws_region
 
    # For State Locking
    dynamodb_table = "dev-ekscluster-test"    

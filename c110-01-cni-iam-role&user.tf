@@ -78,8 +78,3 @@ resource "aws_iam_role_policy_attachment" "cni_iam_role_policy_attach" {
   policy_arn = aws_iam_policy.cni_iam_policy.arn 
   role       = aws_iam_role.cni_iam_role.name
 }
-
-output "cni_iam_role_arn" {
-  description = "CNI IAM Role ARN"
-  value = aws_iam_role.cni_iam_role.arn
-}

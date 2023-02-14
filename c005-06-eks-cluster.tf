@@ -24,7 +24,11 @@ resource "aws_eks_cluster" "eks_cluster" {
     aws_iam_role_policy_attachment.eks-AmazonEKSClusterPolicy,
     aws_iam_role_policy_attachment.eks-AmazonEKSVPCResourceController,
   ]
+  encryption_config {
+    resources = ["secrets"]
+  }
 }
+
 
 resource "aws_eks_addon" "coredns" {
   cluster_name      = local.eks_cluster_name
