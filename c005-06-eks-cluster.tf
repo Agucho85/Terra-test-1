@@ -1,5 +1,6 @@
 # Create AWS EKS Cluster
 resource "aws_eks_cluster" "eks_cluster" {
+	# checkov:skip=CKV_AWS_58: No secrets neede for now check line 28
   name     = local.eks_cluster_name
   role_arn = aws_iam_role.eks_master_role.arn
   version  = var.cluster_version
