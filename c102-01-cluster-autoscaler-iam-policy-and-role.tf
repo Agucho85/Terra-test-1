@@ -64,8 +64,3 @@ resource "aws_iam_role_policy_attachment" "cluster_autoscaler_iam_role_policy_at
   policy_arn = aws_iam_policy.cluster_autoscaler_iam_policy.arn 
   role       = aws_iam_role.cluster_autoscaler_iam_role.name
 }
-
-output "cluster_autoscaler_iam_role_arn" {
-  description = "Cluster Autoscaler IAM Role ARN"
-  value = aws_iam_role.cluster_autoscaler_iam_role.arn
-}

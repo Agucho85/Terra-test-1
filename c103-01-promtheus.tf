@@ -6,7 +6,6 @@ resource "helm_release" "prometheus" {
   repository = "https://prometheus-community.github.io/helm-charts" 
   chart      = "prometheus"
   namespace = "prometheus-system"
-  # version = "14.1.0"
 
   depends_on = [
     aws_eks_cluster.eks_cluster,
@@ -23,10 +22,5 @@ resource "helm_release" "prometheus" {
   set {
     name  = "alertmanager.persistentVolume.storageClass"
     value = "gp2"
-  }
-}
-resource "kubernetes_namespace_v1" "prometheus-system" {
-  metadata {
-    name = "prometheus-system"
   }
 }

@@ -38,11 +38,6 @@ resource "aws_iam_policy" "cni_iam_policy" {
 })
 }
 
-
-output "cni_iam_policy_arn" {
-  value = aws_iam_policy.cni_iam_policy.arn 
-}
-
 # Resource: Create IAM Role and associate the CNI IAM Policy to it
 resource "aws_iam_role" "cni_iam_role" {
   name = "${local.name}-cni-iam-role"

@@ -1,5 +1,4 @@
 # Install Cluster Autoscaler using HELM
-
 # Resource: Helm Release 
 resource "helm_release" "cluster_autoscaler_release" {
   depends_on = [

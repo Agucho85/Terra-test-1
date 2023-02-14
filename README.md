@@ -62,7 +62,7 @@ E) Define `iam.auto.tfvars` here you can match the eks-admin for the cluster.
 
   ## Destroy a cluster    
     terraform destroy  > you will need to execute it 4 times and go to the AWS account an erase de log gruop created for the eks. 
-    
+
 # Terraform files
 - c001-versions.tf  > to set terraform providers, backend configration of tfstate file and lock with dynamo db (check `___________`) 
 
@@ -98,6 +98,7 @@ E) Define `iam.auto.tfvars` here you can match the eks-admin for the cluster.
     - c005-09-namespaces.tf
     - c007-01-kubernetes-provider.tf
     - c099-01-helm-provider.tf
+    - eks.auto.tfvars
   
   ## IAM Section
     - c005-03-iamrole-for-eks-cluster.tf
@@ -121,23 +122,26 @@ E) Define `iam.auto.tfvars` here you can match the eks-admin for the cluster.
     - c007-02-kubernetes-configmap.tf
     - c010-03-k8s-clusterrole-clusterrolebinding.tf
     - check c110.02-cni.yml
+    - for cluster autosclaer, csi, prometheus, metrics
 
   ## ADD-ONS
     - c110-03-cni-addon.tf
     - c110.02-cni.yml > creates several resources inside eks
     - c102-02-cluster-autoscaler-install.tf
     - c103-01-promtheus.tf
+    - c103-03-promtheus-namespace.tf
     - c101-01-ebs-csi-datasources.tf
     - c100-02-metrics-server-install.tf
 
-  
   ## EKS Public Node Groups files
     - c005-07-eks-node-group-public.tf
     - c005-05-securitygroups-eks.tf
     - Folder /private-key contains the key pair for Bastion and/or public node group - View Readme
+    - Variables of Public and Private Node Groups are in the same files (c005-01-eks-variables.tf and ec2bastion.auto.tfvars)
 
   ## EKS Private Node Groups files
     - c005-08-eks-node-group-private.tf
+    - Variables of Public and Private Node Groups are in the same files (c005-01-eks-variables.tf and ec2bastion.auto.tfvars)
 
   ## Terraform and EKS Outputs
     - c005-02-eks-outputs.tf
@@ -148,7 +152,7 @@ E) Define `iam.auto.tfvars` here you can match the eks-admin for the cluster.
     - c102-03-cluster-autoscaler-outputs.tf
   
   ## Bastion
-    - Folder ptivate-key contains the key pair for Bastion and/or public node group - View Readme
+    - Folder private-key contains the key pair for Bastion and/or public node group - View Readme
 		- c004-01-ec2bastion-variables.tf
 		- c004-02-ec2bastion-outputs.tf
 		- c004-03-ec2bastion-securitygroups.tf
