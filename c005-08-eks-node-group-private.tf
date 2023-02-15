@@ -34,7 +34,7 @@ resource "aws_eks_node_group" "eks_ng_private" {
   # Otherwise, EKS will not be able to properly delete EC2 Instances and Elastic Network Interfaces.
   depends_on = [
     aws_iam_role_policy_attachment.eks-AmazonEKSWorkerNodePolicy,
-    aws_iam_role_policy_attachment.eks-AmazonEKS_CNI_Policy,
+    aws_iam_role_policy_attachment.cni_policy_NodeGroup,
     aws_iam_role_policy_attachment.eks-AmazonEC2ContainerRegistryReadOnly,
     kubernetes_config_map_v1.aws_auth
   ] 

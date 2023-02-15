@@ -31,18 +31,3 @@ resource "aws_eks_cluster" "eks_cluster" {
   }
  */ 
 }
-
-
-resource "aws_eks_addon" "coredns" {
-  cluster_name      = local.eks_cluster_name
-  addon_name        = "coredns"
-  resolve_conflicts = "OVERWRITE"
-  depends_on        = [aws_eks_cluster.eks_cluster]
-}
-
-resource "aws_eks_addon" "vpc-cni" {
-  cluster_name             = local.eks_cluster_name
-  addon_name               = "vpc-cni"
-  resolve_conflicts        = "OVERWRITE"
-  service_account_role_arn = aws_iam_role.cni_iam_role.arn
-}

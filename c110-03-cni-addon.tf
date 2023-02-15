@@ -7,7 +7,7 @@ data "kubectl_file_documents" "cni_docs" {
 
 # Resource: kubectl_manifest which will create k8s Resources from the URL specified in above datasource
 resource "kubectl_manifest" "cni_docs" {
-    depends_on = [aws_eks_cluster.eks_cluster, aws_iam_role.eks_admin_role, kubernetes_config_map_v1.aws_auth, aws_eks_node_group.eks_ng_private]
+    depends_on = [aws_eks_cluster.eks_cluster]
     for_each = data.kubectl_file_documents.cni_docs.manifests
     yaml_body = each.value
 }

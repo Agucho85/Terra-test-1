@@ -19,8 +19,8 @@ resource "aws_iam_role_policy_attachment" "eks-AmazonEKSWorkerNodePolicy" {
   role       = aws_iam_role.eks_nodegroup_role.name
 }
 
-resource "aws_iam_role_policy_attachment" "eks-AmazonEKS_CNI_Policy" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy" #solo para ipv4
+resource "aws_iam_role_policy_attachment" "cni_policy_NodeGroup" {
+  policy_arn = aws_iam_policy.cni_iam_policy.arn #solo para ipv4
   role       = aws_iam_role.eks_nodegroup_role.name
 }
 
