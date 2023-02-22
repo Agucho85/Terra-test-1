@@ -54,7 +54,6 @@ E) Define `iam.auto.tfvars` here you can match the eks-admin for the cluster. AD
         **If you have issues and the tfstate got lock please, confirm no one is working on the cluster and perform:
           terraform force-unlock <some-hash-abc-123> (this cames in error mistake)**
     terraform apply example_plan (this command has the auto-approve implicit)
-        **Note: In this action you may need to apply action to finish the configuration of COREDNS addon in EKS**
 
   ## If EKS Cluster already create as per previous sections JUST VERIFY
     a - Check de ADO user that will modify the cluster has RBAC and IAM permission to do it. If not add it. The normal step is to add the user to the group that has the eks-admin role (witch has the the policy to make changes to the cluster).
