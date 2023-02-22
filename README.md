@@ -69,7 +69,7 @@ E) Define `iam.auto.tfvars` here you can match the eks-admin for the cluster. AD
     terraform destroy  > you will need to execute it 4 times and go to the AWS account an erase de log gruop created for the eks. 
 
 # Terraform files
-- c001-versions.tf  > to set terraform providers, backend configration of tfstate file and lock with dynamo db (check `___________`) 
+- c001-versions.tf  > to set terraform providers, backend configration of tfstate file and lock with dynamo db (check `bucket and dynamodb table` if they exists) 
 
 - c002-01-generic-variables.tf > to load variable use by terraform, they can be setup in terraform.tfvars
 
