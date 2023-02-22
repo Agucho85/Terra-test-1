@@ -14,7 +14,7 @@ C) Define `terraform.tfvars` to specify region, environment and project. Note th
 D) Define `vpc.auto.tfvars` specify vpc variables: cidrs name, avz, subnets and others
 change the CIDRS with each vpc that is on the same account to be able to do vpc peering if needed. Note to change de Availabilitty Zones to match the region the vpc is going to be deployed.
 
-E) Define `iam.auto.tfvars` here you can match the eks-admin for the cluster.
+E) Define `iam.auto.tfvars` here you can match the eks-admin for the cluster. ADD ADO-AWS conection USER in this file!!
 
 
 # BEFORE ANY APPLY: CHECK
