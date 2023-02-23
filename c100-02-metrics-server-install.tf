@@ -10,6 +10,6 @@ resource "helm_release" "metrics_server_release" {
     aws_eks_cluster.eks_cluster,
     helm_release.ebs_csi_driver,
     kubernetes_namespace_v1.namespace,
-    # helm_release.prometheus
+    helm_release.prometheus
   ]
 }
