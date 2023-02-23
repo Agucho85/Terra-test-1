@@ -1,4 +1,4 @@
-
+/*
 # Install Kubernetes Metrics Server using HELM
 # Resource: Helm Release 
 resource "helm_release" "prometheus" {
@@ -24,3 +24,4 @@ resource "helm_release" "prometheus" {
     value = "gp2"
   }
 }
+*/
