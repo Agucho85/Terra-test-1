@@ -1,4 +1,4 @@
-cluster_name = "MultiTenant"
+cluster_name = "multitenant"
 cluster_service_ipv4_cidr = "172.20.0.0/16" # cambiarlo si hay otro cluster en la misma cuenta (tema de vpc peering) 
 cluster_version = "1.24"  #la version del cluster de AWS.
 cluster_endpoint_private_access = true  # se utiliza para conectarse a a los nodos en subnet privada con kubectl referencia https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html
