@@ -3,8 +3,5 @@
 variable "users_to_add" {
   description = "User to add as admin in eks."
   type        = set(string)
-  default     = [
-    "kuchuflo1",
-    "kuchuflo2",
-  ]
+  default     = [null]
 }

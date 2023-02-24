@@ -1,4 +1,4 @@
 # Generic Variables
 aws_region = "us-west-2"
 environment = "dev"
-project = "Multitenant"
+project = "DirMOD"
