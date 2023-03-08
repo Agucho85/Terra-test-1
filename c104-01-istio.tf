@@ -4,7 +4,7 @@
 resource "helm_release" "istio_base" {
   name       = "${local.name}-istio-base"
   repository = "https://istio-release.storage.googleapis.com/charts" 
-  chart      = "istio/base"
+  chart      = "base"
   namespace = "istio-system"
 
   depends_on = [
@@ -18,7 +18,7 @@ resource "helm_release" "istio_base" {
 resource "helm_release" "istio_cni" {
   name       = "${local.name}-istio-cni"
   repository = "https://istio-release.storage.googleapis.com/charts" 
-  chart      = "istio/cni"
+  chart      = "cni"
   namespace = "istio-system"
 
   depends_on = [
@@ -32,7 +32,7 @@ resource "helm_release" "istio_cni" {
 resource "helm_release" "istiod" {
   name       = "${local.name}-istiod"
   repository = "https://istio-release.storage.googleapis.com/charts" 
-  chart      = "istio/istiod"
+  chart      = "istiod"
   namespace = "istio-system"
 
   set {
