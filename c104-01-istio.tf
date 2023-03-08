@@ -54,13 +54,13 @@ resource "helm_release" "istio_ingress" {
   name       = "${local.name}-ingress"
   repository = "https://istio-release.storage.googleapis.com/charts" 
   chart      = "gateway"
-  namespace = "istio-system"
+  namespace = "istio-ingress"
 
   depends_on = [
     aws_eks_cluster.eks_cluster,
     helm_release.ebs_csi_driver,
     kubernetes_namespace_v1.namespace,
-    kubernetes_namespace_v1.istio-system,
+    kubernetes_namespace_v1.istio-ingress,
     helm_release.istiod
   ]
 }
