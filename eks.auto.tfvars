@@ -8,13 +8,13 @@ eks_oidc_root_ca_thumbprint = "9e99a48a9960b14926bb7f3b02e22da2b0ab7280" # Valid
 # Variables de EC2 del grupo de nodos
 capacity_type_private = "ON_DEMAND"  # puesto para que solo saque precio mas bajo posible
 disk_size_private = "10"
-instance_types_private = ["t3.medium"]
+instance_types_private = ["m6a.large"]
 desired_size_private = "3"
 min_size_private = "2"
 max_size_private = "5"
 namespace = [
     "dev",
-    "stage",
     "stage-ocptech",
+    "dev-ocptech",
     "test"
  ]
