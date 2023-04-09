@@ -57,7 +57,7 @@ E) Define `iam.auto.tfvars` here you can match the eks-admin for the cluster. AD
 
   ## If EKS Cluster already create as per previous sections JUST VERIFY
     a - Check de ADO user that will modify the cluster has RBAC and IAM permission to do it. If not add it. The normal step is to add the user to the group that has the eks-admin role (witch has the the policy to make changes to the cluster).
-    b - First task should be to  add the profile in the ADO server that run the command:
+    b - First task should be to  add the  in the ADO server that run the command:
        aws eks --region <AWS-REGION> update-kubeconfig --name <EKS-cluster-name> --profile <eks-admin-role-of-AWS>
                         aws_region                            aws_eks_cluster.eks_cluster   ${local.name}-eks-admin-role
     
