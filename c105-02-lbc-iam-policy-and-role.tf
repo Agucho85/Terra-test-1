@@ -24,12 +24,12 @@ resource "aws_iam_role" "lbc_iam_role" {
         Effect = "Allow"
         Sid    = ""
         Principal = {
-          Federated = "${eks.outputs.aws_iam_openid_connect_provider_arn}"
+          Federated = "arn:aws:iam::867925788566:oidc-provider/oidc.eks.us-west-2.amazonaws.com/id/B15A101795B8DDDD7ABEF5B3C4ADBBDB"
         }
         Condition = {
           StringEquals = {
-            "${eks.outputs.aws_iam_openid_connect_provider_extract_from_arn}:aud": "sts.amazonaws.com",            
-            "${eks.outputs.aws_iam_openid_connect_provider_extract_from_arn}:sub": "system:serviceaccount:kube-system:aws-load-balancer-controller"
+            "oidc.eks.us-west-2.amazonaws.com/id/B15A101795B8DDDD7ABEF5B3C4ADBBDB:aud": "sts.amazonaws.com",            
+            "oidc.eks.us-west-2.amazonaws.com/id/B15A101795B8DDDD7ABEF5B3C4ADBBDB:sub": "system:serviceaccount:kube-system:aws-load-balancer-controller"
           }
         }        
       },
