@@ -26,12 +26,12 @@ terraform {
   }
  # Adding Backend as S3 for Remote State Storage
  backend "s3" {
-   bucket = "tfstate-dirmod-multitenant"
-   key    = "dev/cluster/terraform.tfstate"
-   region =  "us-west-2"
+   bucket = "dirmod-multitenant-tfstate"
+   key    = "cluster/terraform.tfstate"
+   region =  "us-east-1"
 
    # For State Locking
-   dynamodb_table = "dev-multitenant-eks-cluster"    
+   dynamodb_table = "multitenant-eks-cluster"    
  }
 }
 

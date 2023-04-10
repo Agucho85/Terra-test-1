@@ -2,7 +2,8 @@
 locals {
   owners = var.project
   environment = var.environment
-  name = "${var.project}-${var.environment}"
+  name = "${var.project}"
+#  name = "${var.project}-${var.environment}"
   #name = "${local.owners}-${local.environment}"
   common_tags = {
     owners = local.owners

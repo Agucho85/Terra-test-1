@@ -11,7 +11,7 @@ variable "vpc_cidr_block" {
 variable "vpc_availability_zones" {
   description = "VPC Availability Zones"
   type = list(string)
-  default = ["us-west-2a", "us-west-2b"]
+  default = ["us-east-2a", "us-east-2b"]
 }
 
 
