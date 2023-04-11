@@ -50,26 +50,22 @@ resource "helm_release" "istiod" {
   ]
 }
 
- resource "helm_release" "istio_ingress" {
+# resource "helm_release" "istio_ingress" {
 #   name       = "${local.name}-ingress"
-   name       = "istio-ingress"
-   repository = "https://istio-release.storage.googleapis.com/charts" 
-   chart      = "gateway"
-   namespace = "istio-ingress"
-   
-
-   depends_on = [
-     aws_eks_cluster.eks_cluster,
-     helm_release.ebs_csi_driver,
-     kubernetes_namespace_v1.namespace,
-     kubernetes_namespace_v1.istio-ingress,
-     helm_release.istiod
-   ]
-#   set {
-#     value  = "NodePort"
-#     name = "service.type"
-#   }
- }
+#   name       = "istio-ingress"
+#   repository = "https://istio-release.storage.googleapis.com/charts" 
+#   chart      = "gateway"
+#   namespace = "istio-ingress"
+#   
+#
+#   depends_on = [
+#     aws_eks_cluster.eks_cluster,
+#     helm_release.ebs_csi_driver,
+#     kubernetes_namespace_v1.namespace,
+#     kubernetes_namespace_v1.istio-ingress,
+#     helm_release.istiod
+#   ]
+# }
 
 
 data "kubectl_file_documents" "prometheus_docs" {
