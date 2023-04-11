@@ -51,7 +51,8 @@ resource "helm_release" "istiod" {
 }
 
  resource "helm_release" "istio_ingress" {
-   name       = "${local.name}-ingress"
+#   name       = "${local.name}-ingress"
+   name       = "istio-ingress"
    repository = "https://istio-release.storage.googleapis.com/charts" 
    chart      = "gateway"
    namespace = "istio-ingress"
@@ -64,10 +65,10 @@ resource "helm_release" "istiod" {
      kubernetes_namespace_v1.istio-ingress,
      helm_release.istiod
    ]
-   set {
-     value  = "NodePort"
-     name = "service.type"
-   }
+#   set {
+#     value  = "NodePort"
+#     name = "service.type"
+#   }
  }
 
 
