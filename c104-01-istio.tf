@@ -66,7 +66,7 @@ resource "helm_release" "istiod" {
    ]
    set {
      value  = "NodePort"
-     name = "values.gateways.istio-ingressgateway.type"
+     name = "service.type"
    }
  }
 
