@@ -6,7 +6,7 @@ cluster_endpoint_public_access = true # si se desahibilita esto, no vas a poder 
 cluster_endpoint_public_access_cidrs = ["0.0.0.0/0"] # las ip autorizadas a realizar comandos kubectl a traves de los cluster_endopoints
 eks_oidc_root_ca_thumbprint = "9e99a48a9960b14926bb7f3b02e22da2b0ab7280" # Valido según documentacion hasta 2037 igual
 # Variables de EC2 del grupo de nodos
-capacity_type_private = "ON_DEMAND"  # puesto para que solo saque precio mas bajo posible
+capacity_type_private = "SPOT"  # puesto para que solo saque precio mas bajo posible
 disk_size_private = "10"
 instance_types_private = ["t3a.large"]
 desired_size_private = "2"
