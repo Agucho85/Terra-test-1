@@ -11,7 +11,7 @@ disk_size_private = "10"
 instance_types_private = ["t3a.large"]
 desired_size_private = "3"
 min_size_private = "2"
-max_size_private = "6"
+max_size_private = "7"
 namespace = [
     "stage-ocptech",
     "dev-ocptech"
