@@ -10,7 +10,7 @@ capacity_type_private = "SPOT"  # puesto para que solo saque precio mas bajo pos
 disk_size_private = "10"
 instance_types_private = ["t3a.large"]
 desired_size_private = "3"
-min_size_private = "2"
+min_size_private = "3"
 max_size_private = "7"
 namespace = [
     "stage-ocptech",
