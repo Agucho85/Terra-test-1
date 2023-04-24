@@ -7,23 +7,23 @@ resource "kubernetes_cluster_role_v1" "eksreadonly_clusterrole" {
     api_groups = [""] # These come under core APIs - kubernetes CORE APIS
     resources  = ["nodes", "namespaces", "pods", "events", "services"]
     #resources  = ["nodes", "namespaces", "pods", "events", "services", "configmaps", "serviceaccounts"] #Uncomment for additional Testing
-    verbs      = ["get", "list", "watch"]    
+    verbs = ["get", "list", "watch"]
   }
   rule {
     api_groups = ["apps"]
     resources  = ["deployments", "daemonsets", "statefulsets", "replicasets"]
-    verbs      = ["get", "list", "watch"]    
+    verbs      = ["get", "list", "watch"]
   }
   rule {
     api_groups = ["batch"]
     resources  = ["jobs"]
-    verbs      = ["get", "list", "watch"]    
+    verbs      = ["get", "list", "watch"]
   }
   rule {
     api_groups = ["apps"]
     resources  = ["pods/portforward"]
     verbs      = ["get", "list", "watch", "create", "delete", "update", "patch"]
-  }   
+  }
 }
 
 # Resource: Cluster Role Binding
@@ -34,7 +34,7 @@ resource "kubernetes_cluster_role_binding_v1" "eksreadonly_clusterrolebinding" {
   role_ref {
     api_group = "rbac.authorization.k8s.io"
     kind      = "ClusterRole"
-    name      = kubernetes_cluster_role_v1.eksreadonly_clusterrole.metadata.0.name 
+    name      = kubernetes_cluster_role_v1.eksreadonly_clusterrole.metadata.0.name
   }
   subject {
     kind      = "Group"

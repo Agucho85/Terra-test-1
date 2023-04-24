@@ -7,25 +7,25 @@ resource "aws_iam_policy" "cluster_autoscaler_iam_policy" {
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
   policy = jsonencode({
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Action": [
-                "autoscaling:DescribeAutoScalingGroups",
-                "autoscaling:DescribeAutoScalingInstances",
-                "autoscaling:DescribeInstances",
-                "autoscaling:DescribeLaunchConfigurations",
-                "autoscaling:DescribeTags",
-                "autoscaling:SetDesiredCapacity",
-                "autoscaling:TerminateInstanceInAutoScalingGroup",
-                "ec2:DescribeLaunchTemplateVersions",
-                "ec2:DescribeInstanceTypes"
-            ],
-            "Resource": "*",
-            "Effect": "Allow"
-        }
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Action" : [
+          "autoscaling:DescribeAutoScalingGroups",
+          "autoscaling:DescribeAutoScalingInstances",
+          "autoscaling:DescribeInstances",
+          "autoscaling:DescribeLaunchConfigurations",
+          "autoscaling:DescribeTags",
+          "autoscaling:SetDesiredCapacity",
+          "autoscaling:TerminateInstanceInAutoScalingGroup",
+          "ec2:DescribeLaunchTemplateVersions",
+          "ec2:DescribeInstanceTypes"
+        ],
+        "Resource" : "*",
+        "Effect" : "Allow"
+      }
     ]
-})
+  })
 }
 
 # Resource: IAM Role for Cluster Autoscaler
@@ -46,9 +46,9 @@ resource "aws_iam_role" "cluster_autoscaler_iam_role" {
         }
         Condition = {
           StringEquals = {
-            "${local.aws_iam_oidc_connect_provider_extract_from_arn}:sub": "system:serviceaccount:kube-system:cluster-autoscaler"
+            "${local.aws_iam_oidc_connect_provider_extract_from_arn}:sub" : "system:serviceaccount:kube-system:cluster-autoscaler"
           }
-        }        
+        }
       },
     ]
   })
@@ -61,6 +61,6 @@ resource "aws_iam_role" "cluster_autoscaler_iam_role" {
 
 # Associate IAM Policy to IAM Role
 resource "aws_iam_role_policy_attachment" "cluster_autoscaler_iam_role_policy_attach" {
-  policy_arn = aws_iam_policy.cluster_autoscaler_iam_policy.arn 
+  policy_arn = aws_iam_policy.cluster_autoscaler_iam_policy.arn
   role       = aws_iam_role.cluster_autoscaler_iam_role.name
 }

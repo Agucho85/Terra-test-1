@@ -76,10 +76,10 @@ variable "max_size_private" {
 
 variable "namespace" {
   description = "Especify the namespace to create"
-  type = set(string)
-  default   = [ 
+  type        = set(string)
+  default = [
     "dev",
     "stage",
     "other"
   ]
- }
+}

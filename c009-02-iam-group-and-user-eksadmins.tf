@@ -19,7 +19,7 @@ resource "aws_iam_group_policy" "eksadmins_iam_group_assumerole_policy" {
           "sts:AssumeRole",
         ]
         Effect   = "Allow"
-        Sid    = "AllowAssumeOrganizationAccountRole"
+        Sid      = "AllowAssumeOrganizationAccountRole"
         Resource = "${aws_iam_role.eks_admin_role.arn}"
       },
     ]
@@ -28,7 +28,7 @@ resource "aws_iam_group_policy" "eksadmins_iam_group_assumerole_policy" {
 
 # Resource: AWS IAM Group Membership
 resource "aws_iam_group_membership" "membership_usser_to_add" {
-  name = "${local.name}-eksadmins-group-membership"
+  name  = "${local.name}-eksadmins-group-membership"
   users = var.users_to_add
-    group = aws_iam_group.eksadmins_iam_group.name
+  group = aws_iam_group.eksadmins_iam_group.name
 }

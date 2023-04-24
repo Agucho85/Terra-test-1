@@ -6,6 +6,7 @@ provider "registry.terraform.io/gavinbunney/kubectl" {
   constraints = "1.14.0"
   hashes = [
     "h1:Ck8Re/28x7VBI5ArFg0VSg1woPu/APm1ZbMuzqUdnPo=",
+    "h1:ItrWfCZMzM2JmvDncihBMalNLutsAk7kyyxVRaipftY=",
     "zh:0350f3122ff711984bbc36f6093c1fe19043173fad5a904bce27f86afe3cc858",
     "zh:07ca36c7aa7533e8325b38232c77c04d6ef1081cb0bac9d56e8ccd51f12f2030",
     "zh:0c351afd91d9e994a71fe64bbd1662d0024006b3493bb61d46c23ea3e42a7cf5",
@@ -22,6 +23,7 @@ provider "registry.terraform.io/hashicorp/aws" {
   version     = "4.54.0"
   constraints = ">= 3.63.0, ~> 4.14"
   hashes = [
+    "h1:eiPVhVhAawhvnZIwtRRM4y7UpfWSJpYXFHwml1M2LB0=",
     "h1:gr0Xlk9orKv2lMVbyGpiPHdBpyQzTblOqto3JF517DQ=",
     "zh:24358aefc06b3f38878680fe606dab2570cb58ab952750c47e90b81d3b05e606",
     "zh:3fc0ef459d6bb4fbb0e4eb7b8adadddd636efa6d975be6e70de7327d83e15729",
@@ -46,6 +48,7 @@ provider "registry.terraform.io/hashicorp/helm" {
   constraints = "~> 2.5"
   hashes = [
     "h1:BDS8a4fxCNuzopFWnPrnhk96wE7vd4vtF4I1F2eWgcM=",
+    "h1:fEDID5J/9ret/sLpOSNAu98F/ZBEZhOmL0Leut7m5JU=",
     "zh:1471cb45908b426104687c962007b2980cfde294fa3530fabc4798ce9fb6c20c",
     "zh:1572e9cec20591ec08ece797b3630802be816a5adde36ca91a93359f2430b130",
     "zh:1b10ae03cf5ab1ae21ffaac2251de99797294ae4242b156b3b0beebbdbcb7e0f",
@@ -65,6 +68,7 @@ provider "registry.terraform.io/hashicorp/http" {
   version     = "3.2.1"
   constraints = "~> 3.2.1"
   hashes = [
+    "h1:Q2YQZzEhHQVlkQCQVpMzFVs0Gg+eXzISbOwaOYqpflc=",
     "h1:ifGB/kA8VssmJsqUL0TvF2rBBhqKMXHGbYzSEQT7MfY=",
     "zh:088b3b3128034485e11dff8da16e857d316fbefeaaf5bef24cceda34c6980641",
     "zh:09ed1f2462ea4590b112e048c4af556f0b6eafc7cf2c75bb2ac21cd87ca59377",
@@ -85,6 +89,7 @@ provider "registry.terraform.io/hashicorp/kubernetes" {
   version     = "2.18.0"
   constraints = "~> 2.11"
   hashes = [
+    "h1:H81uBnhN5NDpFrZ39Q9mEIY2bcjZv9oyT4+BlQgeFzM=",
     "h1:SQfBL8eRvkJ2APTHSWP/rMPPlOESb4F5LSZNSqIQ/Lk=",
     "zh:38f24011d5ee8479ed4758c66cad336509ec02b55c1188ce0ec4b826943aaf0a",
     "zh:7d34901f2aff2f46748e81e3d4bbc1aeacc1cc78c2c7da34a84311633ccc8458",

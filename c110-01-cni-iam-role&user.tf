@@ -6,36 +6,36 @@ resource "aws_iam_policy" "cni_iam_policy" {
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
   policy = jsonencode({
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-                "ec2:AssignPrivateIpAddresses",
-                "ec2:AttachNetworkInterface",
-                "ec2:CreateNetworkInterface",
-                "ec2:DeleteNetworkInterface",
-                "ec2:DescribeInstances",
-                "ec2:DescribeTags",
-                "ec2:DescribeNetworkInterfaces",
-                "ec2:DescribeInstanceTypes",
-                "ec2:DetachNetworkInterface",
-                "ec2:ModifyNetworkInterfaceAttribute",
-                "ec2:UnassignPrivateIpAddresses"
-            ],
-            "Resource": "*"
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "ec2:CreateTags"
-            ],
-            "Resource": [
-                "arn:aws:ec2:*:*:network-interface/*"
-            ]
-        }
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "ec2:AssignPrivateIpAddresses",
+          "ec2:AttachNetworkInterface",
+          "ec2:CreateNetworkInterface",
+          "ec2:DeleteNetworkInterface",
+          "ec2:DescribeInstances",
+          "ec2:DescribeTags",
+          "ec2:DescribeNetworkInterfaces",
+          "ec2:DescribeInstanceTypes",
+          "ec2:DetachNetworkInterface",
+          "ec2:ModifyNetworkInterfaceAttribute",
+          "ec2:UnassignPrivateIpAddresses"
+        ],
+        "Resource" : "*"
+      },
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "ec2:CreateTags"
+        ],
+        "Resource" : [
+          "arn:aws:ec2:*:*:network-interface/*"
+        ]
+      }
     ]
-})
+  })
 }
 
 # Resource: Create IAM Role and associate the CNI IAM Policy to it
@@ -54,10 +54,10 @@ resource "aws_iam_role" "cni_iam_role" {
           Federated = "${aws_iam_openid_connect_provider.oidc_provider.arn}"
         }
         Condition = {
-          StringEquals = {            
-            "${local.aws_iam_oidc_connect_provider_extract_from_arn}:sub": "system:serviceaccount:kube-system:aws-node"
+          StringEquals = {
+            "${local.aws_iam_oidc_connect_provider_extract_from_arn}:sub" : "system:serviceaccount:kube-system:aws-node"
           }
-        }        
+        }
 
       },
     ]
@@ -70,6 +70,6 @@ resource "aws_iam_role" "cni_iam_role" {
 
 # Associate EBS CNI IAM Policy to EBS CNI IAM Role
 resource "aws_iam_role_policy_attachment" "cni_iam_role_policy_attach" {
-  policy_arn = aws_iam_policy.cni_iam_policy.arn 
+  policy_arn = aws_iam_policy.cni_iam_policy.arn
   role       = aws_iam_role.cni_iam_role.name
 }
